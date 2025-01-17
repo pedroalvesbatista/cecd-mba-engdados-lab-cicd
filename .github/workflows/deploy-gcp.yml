@@ -41,7 +41,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ env.IMAGE_NAME }} -f Dockerfile .
+          docker build -t ${{ env.AR_URL }}/${{ env.IMAGE_NAME }} -f Dockerfile .
       
       - name: Push Docker image to Artifact Registry
         run: |
