@@ -41,7 +41,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t us-central1-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/xpto-registry:${{ steps.set_tag.outputs.tag }} -f Dockerfile .
+          docker build -t us-central1-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/xpto-registry/${{ env.IMAGE_NAME }}:${{ steps.set_tag.outputs.tag }} -f Dockerfile .
       
       - name: Push Docker image to Artifact Registry
         run: |
@@ -49,6 +49,6 @@ jobs:
       
       - name: Deploy to Cloud Run
         run: |-
-             gcloud run deploy xpto-plataforma --image us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/xpto-plataforma/${{ env.IMAGE_NAME }}:${{ steps.set_tag.outputs.tag }}  \
+             gcloud run deploy xpto-plataforma --image us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/xpto-registry/${{ env.IMAGE_NAME }}:${{ steps.set_tag.outputs.tag }}  \
              --platform managed --region me-central1 --concurrency 1 \
              --min-instances 1 --max-instances 1 --port 80 --platform managed --allow-unauthenticated
