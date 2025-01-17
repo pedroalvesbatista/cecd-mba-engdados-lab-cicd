@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: 'xpto-plataforma'
   PROJECT_ID: 'laboratorio-mba-sirius-cecd'
   AR_REPO_LOCATION: 'us-central1'
-  AR_URL: 'us-docker.pkg.dev/laboratorio-mba-sirius-cecd/xpto-registry'
+  AR_URL: 'us-central1-docker.pkg.dev/laboratorio-mba-sirius-cecd/xpto-registry'
   SERVICE_ACCOUNT: 'githubactionst@laboratorio-mba-sirius-cecd.iam.gserviceaccount.com' 
   WORKLOAD_IDENTITY_PROVIDER: 'projects/269232469558/locations/global/workloadIdentityPools/xpto-pool/providers/githubactions-provider'
 
@@ -49,6 +49,6 @@ jobs:
       
       - name: Deploy to Cloud Run
         run: |-
-             gcloud run deploy xpto-plataforma --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/xpto-registry/${{ env.IMAGE_NAME }}  \
+             gcloud run deploy xpto-plataforma --image us-central1-docker.pkg.dev/laboratorio-mba-sirius-cecd/xpto-registry/${{ env.GCP_PROJECT_ID }}/xpto-registry/${{ env.IMAGE_NAME }}  \
              --platform managed --region me-central1 --concurrency 1 \
              --min-instances 1 --max-instances 1 --port 80 --platform managed --allow-unauthenticated
